@@ -7,9 +7,19 @@
   <meta name="claude:viewport-fit-sides" content="cover">
   <meta name="description" content="Receitas de aproveitamento integral: cascas, talos, sementes e a comida de ontem viram pratos que dão gosto de servir.">
 
+  <!-- App instalável (PWA) -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#FFFFFF">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="EcoChef">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
 
   <!-- Ordem importa: tokens → base → layout → componentes → páginas -->
   <link rel="stylesheet" href="css/tokens.css">
@@ -32,6 +42,7 @@
   <div id="app"></div>
   <dialog id="dialog" class="dialog"></dialog>
   <div id="toast" class="toast" role="status"></div>
+  <div id="install-hint"></div>
 
   <script type="module" src="js/main.js"></script>
 </body>

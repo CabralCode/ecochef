@@ -13,6 +13,7 @@ import { $, toast, todayKey, scrollToElement } from "./core/utils.js";
 import { watchMissingImages } from "./ui/media.js";
 import { initCarousel, goToBanner, stepBanner } from "./ui/carousel.js";
 import { showMessage, closeDialog } from "./ui/dialog.js";
+import { registerServiceWorker, showInstallHint, dismissInstallHint } from "./ui/install.js";
 import { renderHeader } from "./views/header.js";
 import { renderLogin, onHandleInput, submitAuth } from "./views/login.js";
 import { renderHome, renderGrid } from "./views/home.js";
@@ -79,7 +80,7 @@ function openRecipe(id) {
 const ACTIONS = {
   // conta
   "auth-mode": v => { ui.authMode = v; render(); },
-  guest: () => { state.user = { name: "Visitante" }; save(); render(); },
+  guest: () => { state.user = { name: "Visitante" }; save(); render(); scrollTo(0, 0); showInstallHint(); },
   logout: () => { state.user = null; save(); ui.view = "home"; render(); scrollTo(0, 0); },
 
   // navegação
@@ -161,6 +162,7 @@ const ACTIONS = {
   "choose-plan": v => { state.plan = Number(v); save(); render(); toast(`Plano ${PLANS[state.plan].name} ativado. Bom proveito!`); },
   "dialog-plans": () => go("plans"),
   "dialog-close": () => closeDialog(),
+  "install-dismiss": () => dismissInstallHint(),
 };
 
 /* ---------- Eventos ---------- */
@@ -191,7 +193,7 @@ function bindEvents() {
   document.addEventListener("submit", e => {
     e.preventDefault();
     if (e.target.id === "search-form") scrollToElement($("#results-head"));
-    if (e.target.id === "auth-form" && submitAuth(e.target)) { ui.view = "home"; render(); }
+    if (e.target.id === "auth-form" && submitAuth(e.target)) { ui.view = "home"; render(); scrollTo(0, 0); showInstallHint(); }
   });
 
   // Foto enviada pelo usuário: reduzida para no máximo 900 px e guardada no navegador.
@@ -226,6 +228,8 @@ watchMissingImages();
 initCarousel();
 bindEvents();
 render();
+registerServiceWorker();
+if (state.user) showInstallHint();
 
 // Disponível no console para depuração.
 window.EcoChef = { state, ui, RECIPES, render };

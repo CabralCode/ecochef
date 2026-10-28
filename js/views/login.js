@@ -25,7 +25,7 @@ export function renderLogin() {
     <section class="auth__hero">
       <div class="auth__pattern" aria-hidden="true"></div>
       <div class="auth__copy">
-        <div class="logo logo--large">EcoChef</div>
+        <img class="auth__logo" src="assets/brand/logo-vertical-branco.png" alt="EcoChef" width="150" height="138">
         <h1>Sabor que não vai pro lixo.</h1>
         <p>Receitas testadas que transformam cascas, talos, sementes e a comida de ontem em pratos que dão gosto de servir.</p>
         <div class="auth__pills"><span>Cascas</span><span>Talos e folhas</span><span>Pão amanhecido</span><span>Comida de ontem</span></div>

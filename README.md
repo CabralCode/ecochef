@@ -22,6 +22,8 @@ Depois acesse http://localhost:8000. No VS Code, a extensão **Live Server** tam
 ```
 ecochef/
 ├── index.html              Página única: carrega CSS e o js/main.js
+├── manifest.webmanifest    Dados do app instalável (nome, ícones, cores)
+├── sw.js                   Service worker: abre rápido e funciona offline
 ├── css/
 │   ├── tokens.css          Cores, fontes, raios e tema escuro (mude aqui para mudar o app todo)
 │   ├── base.css            Reset, tipografia e campos de formulário
@@ -56,6 +58,22 @@ ecochef/
     ├── receitas/           Fotos das receitas (veja LEIA-ME.md com os 57 nomes)
     └── banners/            Imagens dos banners (veja LEIA-ME.md)
 ```
+
+## App no celular (PWA)
+
+O EcoChef pode ser instalado como app, sem App Store:
+
+- `manifest.webmanifest`: nome, cores e ícones do app
+- `assets/icons/`: ícones (tela de início do iPhone, Android e aba do navegador)
+- `sw.js`: service worker que guarda os arquivos para abrir rápido e funcionar sem internet
+- `js/ui/install.js`: registra o service worker e mostra, no iPhone, o aviso de como instalar
+
+No iPhone: abra o site publicado no **Safari**, toque em **Compartilhar** e em **Adicionar à Tela de Início**.
+
+**Ao publicar uma versão nova**, aumente o número de `VERSION` no começo do `sw.js` (ex.: `ecochef-v2`).
+Sem isso, quem já instalou continua vendo a versão guardada. Se criar arquivos novos de CSS ou JS, inclua também na lista `APP_FILES`.
+
+O service worker só funciona em endereço `https://` (como o GitHub Pages) ou em `localhost`.
 
 ## Como adicionar imagens
 

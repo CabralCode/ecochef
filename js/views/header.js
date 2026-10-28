@@ -19,16 +19,15 @@ const NAV = [
 
 function recipesMenu() {
   const items = group => collectionsByGroup(group).map(c => {
-    const count = RECIPES.filter(c.match).length;
     return `<button class="menu__item" role="menuitem" data-action="show-collection" data-value="${c.id}">
       <span class="menu__bubble" style="--bubble:${c.bg}"><svg viewBox="0 0 64 64" aria-hidden="true">${c.icon}</svg></span>
-      <span>${c.name}</span><small>${count}</small>
+      <span>${c.name}</span>
     </button>`;
   }).join("");
   return `<div class="menu menu--mega"><div class="menu__panel" role="menu" aria-label="Categorias de receitas">
     <div class="menu__group"><span class="menu__heading">Por ingrediente</span>${items("ingrediente")}</div>
     <div class="menu__group"><span class="menu__heading">Por ocasião</span>${items("ocasiao")}</div>
-    <div class="menu__footer"><button class="menu__all" data-action="show-collection" data-value="todas">Ver todas as ${RECIPES.length} receitas →</button></div>
+    <div class="menu__footer"><button class="menu__all" data-action="show-collection" data-value="todas">Ver todas as receitas →</button></div>
   </div></div>`;
 }
 
@@ -66,7 +65,7 @@ export function renderHeader() {
   const li = levelIndex(state.points);
   return `<header class="site-header ${ui.suppressMenus ? "menus-off" : ""}">
     <div class="site-header__inner">
-      <button class="logo" data-action="home" aria-label="EcoChef, voltar ao início">EcoChef</button>
+      <button class="logo" data-action="home" aria-label="EcoChef, voltar ao início"><img src="assets/brand/logo-horizontal-cor.png" alt="EcoChef" width="160" height="47"></button>
       <nav class="nav" aria-label="Principal">${nav}</nav>
       <div class="user-status">
         <button class="xp-chip" data-action="go" data-value="profile" aria-label="Nível ${LEVELS[li].name}, ${state.points} pontos. Ver meu perfil">

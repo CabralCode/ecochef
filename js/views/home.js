@@ -48,11 +48,10 @@ function collections() {
       <button class="collections__arrow collections__arrow--prev" data-action="collections-scroll" data-value="-1" aria-label="Categorias anteriores">‹</button>
       <div class="collections__track" id="collections-track">
         ${COLLECTIONS.map(c => {
-          const count = RECIPES.filter(c.match).length;
           const on = c.id === active;
-          return `<button class="collection ${on ? "is-active" : ""}" data-action="toggle-collection" data-value="${c.id}" aria-pressed="${on}" aria-label="${c.name}: ${count} receitas">
+          return `<button class="collection ${on ? "is-active" : ""}" data-action="toggle-collection" data-value="${c.id}" aria-pressed="${on}">
             <span class="collection__bubble" style="--bubble:${c.bg}"><svg viewBox="0 0 64 64" aria-hidden="true">${c.icon}</svg></span>
-            <b>${c.name}</b><small>${plural(count, "receita", "receitas")}</small>
+            <b>${c.name}</b>
           </button>`;
         }).join("")}
       </div>
