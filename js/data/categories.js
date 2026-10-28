@@ -1,8 +1,3 @@
-/**
- * Coleções exibidas nos círculos da home e no menu "Receitas".
- * `match(recipe)` decide se a receita entra na coleção.
- * `group`: "ingrediente" ou "ocasiao" (usado no menu suspenso).
- */
 const byIds = ids => recipe => ids.includes(recipe.id);
 
 export const COLLECTIONS = [

@@ -1,4 +1,3 @@
-/** Ícones SVG da interface (traço em currentColor, grade 24 × 24). */
 const stroke = (d, width = 2) =>
   `<path d="${d}" fill="none" stroke="currentColor" stroke-width="${width}" stroke-linecap="round" stroke-linejoin="round"/>`;
 

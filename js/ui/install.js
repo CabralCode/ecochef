@@ -1,8 +1,3 @@
-/**
- * Instalação como app (PWA).
- * - Registra o service worker (sw.js), que guarda os arquivos para abrir rápido e sem internet.
- * - No iPhone/iPad, mostra um aviso ensinando a usar "Adicionar à Tela de Início".
- */
 import { $ } from "../core/utils.js";
 
 const DISMISS_KEY = "ecochef.installHintDismissed";
@@ -10,9 +5,7 @@ const SNOOZE_DAYS = 14;
 
 export function registerServiceWorker() {
   if (!("serviceWorker" in navigator) || location.protocol === "file:") return;
-  navigator.serviceWorker.register("./sw.js").catch(() => {
-    /* ambiente sem suporte (pré-visualização, por exemplo): o app funciona normalmente */
-  });
+  navigator.serviceWorker.register("./sw.js").catch(() => {});
 }
 
 const isIOS = () =>
@@ -45,7 +38,7 @@ export function showInstallHint() {
 }
 
 export function dismissInstallHint() {
-  try { localStorage.setItem(DISMISS_KEY, String(Date.now())); } catch (e) { /* sem armazenamento */ }
+  try { localStorage.setItem(DISMISS_KEY, String(Date.now())); } catch {}
   const box = $("#install-hint");
   if (box) box.innerHTML = "";
 }

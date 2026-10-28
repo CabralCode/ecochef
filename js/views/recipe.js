@@ -1,4 +1,3 @@
-/** Página da receita: destaque, ingredientes, nutrição, preparo, vídeo e avaliações. */
 import { RECIPES } from "../data/recipes.js";
 import { planName } from "../data/plans.js";
 import { POINTS } from "../config.js";
@@ -11,7 +10,6 @@ import { planBadge } from "../ui/recipeCard.js";
 
 export const findRecipe = id => RECIPES.find(r => r.id === Number(id));
 
-/* ---------- Nutrição ---------- */
 function nutritionTable(recipe, servings) {
   const n = recipe.nutrition;
   const rows = [["Calorias", n.kcal, "kcal", true], ["Proteínas", n.protein, "g"], ["Carboidratos", n.carbs, "g"], ["Gorduras", n.fat, "g"], ["Fibras", n.fiber, "g"]];
@@ -26,7 +24,7 @@ function nutritionTable(recipe, servings) {
   </div>`;
 }
 
-/* ---------- Vídeo (prévia passo a passo) ---------- */
+// prévia do vídeo: 6s por passo
 const STEP_SECONDS = 6;
 const video = { seconds: 0, playing: false, timer: null };
 
@@ -76,7 +74,6 @@ const videoBlock = () => `<div class="video">
   </div>
   <p class="note">Prévia do passo a passo. Em breve, o vídeo completo com chefs e criadores convidados.</p>`;
 
-/* ---------- Avaliações ---------- */
 function reviewsBlock(recipe) {
   const list = reviewsFor(recipe.id);
   const avg = averageRating(recipe.id);
@@ -92,7 +89,6 @@ function reviewsBlock(recipe) {
     <button class="btn" data-action="review-send">Publicar avaliação · +${POINTS.review} pts</button>`;
 }
 
-/* ---------- Página ---------- */
 export function renderRecipe() {
   const recipe = findRecipe(ui.recipeId);
   const scale = ui.servings / recipe.servings;

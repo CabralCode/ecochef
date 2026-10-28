@@ -5,10 +5,6 @@ const pick = (key, avatar) => {
   return part.items[avatar[key] ?? 0]?.svg || "";
 };
 
-/**
- * Desenha o personagem. O aro externo usa a cor do plano (gradientes #plan-0, #plan-1, #plan-2
- * definidos no index.html) e o fundo é recortado pelo círculo #avatar-clip.
- */
 export function renderAvatar(avatar, plan = 0, size = 44) {
   return `<svg class="avatar" viewBox="0 0 100 100" width="${size}" height="${size}" role="img" aria-label="Personagem">
     <g clip-path="url(#avatar-clip)">${pick("background", avatar)}</g>

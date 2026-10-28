@@ -1,7 +1,6 @@
 import { sampleReviewsFor } from "../data/community.js";
 import { state } from "./store.js";
 
-/** Avaliações de uma receita: a do usuário (se houver) primeiro, depois as de exemplo. */
 export function reviewsFor(recipeId) {
   const list = sampleReviewsFor(recipeId);
   const mine = state.reviews[recipeId];

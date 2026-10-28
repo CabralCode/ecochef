@@ -1,4 +1,3 @@
-/** Perfil: personagem, provador, nível e troféus. */
 import { WARDROBE, wardrobePart } from "../data/avatar.js";
 import { LEVELS, levelIndex, levelProgress, nextLevel } from "../data/levels.js";
 import { planName } from "../data/plans.js";

@@ -1,4 +1,3 @@
-/** Página de planos. */
 import { PLANS } from "../data/plans.js";
 import { state } from "../core/store.js";
 

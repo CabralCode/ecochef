@@ -1,20 +1,14 @@
-/* ==========================================================================
-   Tokens de design do EcoChef — identidade visual oficial
-   Paleta: Noite de Cozinha, Fogão Diário, Folha Nova e Molho Reduzido,
-   mais o laranja e o verde do logo. Mude aqui para mudar o app todo.
-   ========================================================================== */
-
 :root {
-  /* Paleta da marca */
-  --navy: #1E1D56;           /* Noite de Cozinha: textos, títulos e botões de navegação */
-  --coral: #FA4846;          /* Fogão Diário: chamadas e destaques */
-  --leaf: #33A67B;           /* Folha Nova: detalhes, barras e selos */
-  --leaf-strong: #1F7F5C;    /* Folha Nova escurecida: botões com texto branco (contraste AA) */
-  --wine: #A32237;           /* Molho Reduzido: textos de destaque e banners */
-  --orange: #EE7433;         /* laranja do chapéu do logo */
-  --logo-green: #008058;     /* verde do bigode do logo */
+  /* paleta */
+  --navy: #1E1D56;
+  --coral: #FA4846;
+  --leaf: #33A67B;
+  --leaf-strong: #1F7F5C;
+  --wine: #A32237;
+  --orange: #EE7433;
+  --logo-green: #008058;
 
-  /* Superfícies e texto (fundo branco) */
+  /* base */
   --bg: #FFFFFF;
   --surface: #FFFFFF;
   --surface-soft: #F4F4F8;
@@ -22,17 +16,16 @@
   --muted: #5D5C84;
   --line: #E4E4EE;
 
-  /* Papéis */
   --header: #FFFFFF;
   --brand-text: var(--leaf-strong);
-  --action: var(--leaf-strong);  /* botão principal */
-  --accent: var(--coral);        /* botão de chamada */
-  --accent-text: var(--wine);    /* números e textos de destaque */
+  --action: var(--leaf-strong);
+  --accent: var(--coral);
+  --accent-text: var(--wine);
   --danger: #C62828;
   --focus: var(--coral);
   --gold: #D4A017;
 
-  /* Tipografia */
+  /* tipografia */
   --font: "Poppins", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   --text-xs: 12px;
   --text-sm: 14px;
@@ -41,7 +34,7 @@
   --title-md: 32px;
   --title-lg: 38px;
 
-  /* Forma e espaço */
+  /* medidas */
   --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 24px;

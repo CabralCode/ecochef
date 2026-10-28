@@ -1,9 +1,3 @@
-/**
- * Imagens de receitas e banners com placeholder automático.
- *
- * O placeholder fica sempre por baixo. A <img> é desenhada por cima e, se o arquivo
- * não existir, ela é removida e o caminho entra na lista `missing` para não ser pedido de novo.
- */
 import { IMAGES } from "../config.js";
 import { state } from "../core/store.js";
 import { escapeHtml } from "../core/utils.js";
@@ -16,14 +10,6 @@ export const recipeImagePath = recipe =>
 
 export const bannerImagePath = banner => banner.image || `${IMAGES.banners}/${banner.id}.${IMAGES.extension}`;
 
-/**
- * @param {object} opts
- * @param {string} opts.src      caminho da imagem
- * @param {string} opts.alt      texto alternativo
- * @param {string} opts.label    texto do placeholder
- * @param {"camera"|"play"} [opts.placeholderIcon]
- * @param {boolean} [opts.eager] carregar sem esperar a rolagem (banners do topo)
- */
 export function media({ src, alt, label, placeholderIcon = "camera", eager = false }) {
   const placeholder = `<span class="media__placeholder">${icon(placeholderIcon, 34)}<span>${label}</span></span>`;
   const img = src && !missing.has(src)
@@ -38,7 +24,7 @@ export const recipeMedia = (recipe, opts = {}) =>
 export const bannerMedia = banner =>
   media({ src: bannerImagePath(banner), alt: banner.title, label: "Imagem do banner", eager: true });
 
-/** Chamar uma vez na inicialização. */
+// se a imagem não existir, tira a <img> e fica só o placeholder
 export function watchMissingImages() {
   document.addEventListener("error", event => {
     const img = event.target;

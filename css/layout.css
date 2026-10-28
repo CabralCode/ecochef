@@ -1,8 +1,4 @@
-/* ==========================================================================
-   Layout: cabeçalho, navegação, menus suspensos e área da página
-   ========================================================================== */
-
-/* ---------- Página ---------- */
+/* página */
 .page {
   max-width: var(--page-width);
   margin: 0 auto;
@@ -18,7 +14,7 @@
 .section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; margin-bottom: 14px; }
 .section-head h2 { font-size: var(--title-sm); font-weight: 800; letter-spacing: -.01em; }
 
-/* ---------- Cabeçalho ---------- */
+/* header */
 .site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--header); color: var(--ink); border-bottom: 1px solid var(--line); }
 .site-header__inner {
   max-width: var(--page-width);
@@ -35,13 +31,11 @@
 .nav { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
 .nav__link { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 0; color: var(--ink); font-weight: 600; padding: 10px 14px; border-radius: var(--radius-pill); min-height: var(--tap); }
 .nav__icon { display: none; flex: none; }
-/* No computador, só Favoritas mostra o ícone (estrela) ao lado do texto */
 .nav__link[data-value="favorites"] .nav__icon { display: block; width: 17px; height: 17px; }
 .nav__link:hover { background: var(--surface-soft); }
 .nav__link.is-active, .nav__link.is-active:hover { background: var(--navy); color: #fff; }
 .nav__chevron { margin-left: 6px; vertical-align: -1px; transition: transform .15s; }
 
-/* Pontos e avatar */
 .user-status { display: flex; align-items: center; gap: 10px; }
 .xp-chip { display: flex; align-items: center; gap: 8px; min-height: var(--tap); padding: 4px 14px 4px 4px; border: 0; border-radius: var(--radius-pill); background: var(--surface-soft); color: var(--ink); }
 .xp-chip:hover { background: var(--line); }
@@ -51,7 +45,7 @@
 .avatar-button { position: relative; background: none; border: 0; padding: 0; border-radius: 50%; line-height: 0; min-width: var(--tap); min-height: var(--tap); }
 .avatar-button__edit { position: absolute; right: -2px; bottom: -2px; width: 20px; height: 20px; border-radius: 50%; background: var(--coral); color: #fff; display: grid; place-items: center; border: 2px solid var(--header); }
 
-/* ---------- Menus suspensos (abrem ao passar o mouse ou com o teclado) ---------- */
+/* menus */
 .has-menu { position: relative; display: flex; }
 .has-menu:hover .nav__chevron, .has-menu:focus-within .nav__chevron { transform: rotate(180deg); }
 
@@ -84,7 +78,7 @@
 .menu__profile small { color: var(--muted); }
 .menu__divider { border-top: 1px solid var(--line); margin: 6px 0; }
 
-/* ---------- Celular: navegação vira barra fixa embaixo ---------- */
+/* celular: nav vai pra baixo */
 @media (max-width: 700px) {
   :root { --gutter: 16px; --title-md: 26px; }
   .site-header__inner { padding-block: 8px; gap: 8px; }
@@ -98,7 +92,6 @@
     border-top: 1px solid var(--line);
     box-shadow: 0 -4px 16px rgba(30, 29, 86, .08);
   }
-  /* Barra inferior: ícone em cima, nome embaixo, todos na mesma altura */
   .nav { align-items: stretch; }
   .nav > .nav__link, .has-menu > .nav__link {
     flex: 1; width: 100%; height: 56px; min-height: 0;
@@ -118,4 +111,35 @@
   .avatar-button { min-width: 40px; min-height: 40px; }
 
   .page { padding-block: 16px calc(100px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* rodapé */
+.site-footer { margin-top: 40px; background: var(--navy); color: #E4E4F4; }
+.site-footer__inner, .site-footer__bottom {
+  max-width: var(--page-width); margin: 0 auto;
+  padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+}
+.site-footer__inner { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.4fr; gap: 32px; padding-block: 44px 32px; }
+.footer__brand { display: flex; gap: 14px; align-items: flex-start; }
+.footer__brand b { display: block; color: #fff; font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+.footer__brand p { font-size: var(--text-sm); max-width: 30ch; }
+.footer__mark { width: 56px; height: 56px; flex: none; display: grid; place-items: center; border-radius: 16px; background: #fff; }
+.footer__col h2 { margin-bottom: 12px; color: #fff; font-size: var(--text-sm); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.footer__col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.footer__link { min-height: 36px; padding: 0; border: 0; background: none; color: #E4E4F4; font-size: var(--text-sm); text-align: left; }
+.footer__link:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.footer__credit { display: flex; gap: 10px; align-items: flex-start; font-size: var(--text-sm); }
+.footer__credit svg { flex: none; margin-top: 1px; color: var(--coral); }
+.footer__credit b { color: #fff; }
+.site-footer__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; padding-block: 18px; border-top: 1px solid rgba(255, 255, 255, .14); font-size: 13px; color: #B9B8D8; }
+
+@media (max-width: 900px) {
+  .site-footer__inner { grid-template-columns: 1fr 1fr; }
+  .footer__brand, .footer__about { grid-column: 1 / -1; }
+}
+@media (max-width: 700px) {
+  .page { padding-bottom: 24px; }
+  .site-footer { margin-top: 24px; padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  .site-footer__inner { gap: 24px; padding-block: 32px 24px; }
 }

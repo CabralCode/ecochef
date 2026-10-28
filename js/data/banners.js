@@ -1,14 +1,3 @@
-/**
- * Banners do carrossel da home.
- *
- * Tipos:
- * - "recipe": banner de receita com imagem. A imagem fica em assets/img/banners/<id>.webp
- *             (enquanto ela não existir, aparece um placeholder).
- * - "halloween" e "points": banners especiais com ilustração animada em código.
- *
- * `theme` usa as cores da marca: navy, leaf, orange, wine ou coral (veja .banner--<theme> em css/components.css).
- * `recipe` é o id da receita aberta pelo botão.
- */
 export const BANNERS = [
   {
     id: "halloween",

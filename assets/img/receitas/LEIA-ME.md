@@ -1,12 +1,7 @@
-# Imagens das receitas
+# Fotos das receitas
 
-Salve cada foto nesta pasta com **exatamente** o nome abaixo. O app encontra a imagem sozinho.
-Enquanto o arquivo não existir, aparece o placeholder "Imagem da receita".
-
-- Formato: WebP (qualidade 75 a 80)
-- Tamanho: **1200 × 900 px** (proporção 4:3)
-- Peso alvo: até 150 KB por foto
-- Deixe o prato centralizado: o card corta um pouco das bordas em telas diferentes.
+WebP, 1200 × 900 (4:3), até ~150 KB. Prato centralizado, porque o card corta um pouco das bordas.
+O nome do arquivo é o slug da receita:
 
 | # | Receita | Nome do arquivo |
 |---|---|---|

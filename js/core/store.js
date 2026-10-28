@@ -1,59 +1,49 @@
-/**
- * Estado do app.
- *
- * `state` guarda o que precisa persistir (conta, pontos, favoritas...). Hoje fica no
- * localStorage do navegador. Quando houver banco de dados, troque `load` e `save`
- * por chamadas à API mantendo o mesmo formato.
- *
- * `ui` guarda o que é só da tela atual (página aberta, filtro, busca...).
- */
 import { STORAGE_KEY, LEGACY_STORAGE_KEY } from "../config.js";
 import { DEFAULT_AVATAR } from "../data/avatar.js";
 import { PLANS } from "../data/plans.js";
 import { todayKey, weekKey } from "./utils.js";
 
 const initialState = () => ({
-  accounts: {}, // { [email]: { name, handle } }
-  user: null, // { name, handle }
-  plan: 0, // índice em PLANS
+  accounts: {},
+  user: null,
+  plan: 0,
   avatar: { ...DEFAULT_AVATAR },
-  photos: {}, // { [recipeId]: dataURL } fotos enviadas pelo próprio usuário
-  reviews: {}, // { [recipeId]: { stars, text } }
-  favorites: [], // ids de receitas
+  photos: {},
+  reviews: {},
+  favorites: [],
   points: 0,
   savedGrams: 0,
-  cookLog: [], // "idDaReceita|AAAA-MM-DD", um registro por preparo
+  cookLog: [],
   week: { key: "", points: 0 },
-  usage: { day: "", ids: [] }, // receitas abertas hoje
+  usage: { day: "", ids: [] },
 });
 
 export const state = load();
 
 export const ui = {
-  view: "home", // home | favorites | ranking | plans | profile | recipe
+  view: "home",
   recipeId: null,
   servings: 1,
   collection: "todas",
   query: "",
-  authMode: "login", // login | signup
+  authMode: "login",
   wardrobeTab: "base",
   review: { stars: 0, text: "" },
   suppressMenus: false,
 };
 
+// por enquanto tudo fica no localStorage, depois troco pela API
 function load() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) return { ...initialState(), ...JSON.parse(saved) };
     const legacy = JSON.parse(localStorage.getItem(LEGACY_STORAGE_KEY) || "null");
     if (legacy) return migrateLegacy(legacy);
-  } catch (e) {
-    /* armazenamento indisponível: segue com estado vazio */
-  }
+  } catch {}
   return initialState();
 }
 
-/** Converte os dados da primeira versão do protótipo (ecochef.v1). */
+// converte o formato antigo (ecochef.v1)
 function migrateLegacy(old) {
   const a = old.av || {};
   return {
@@ -74,12 +64,9 @@ function migrateLegacy(old) {
 export function save() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch (e) {
-    /* sem armazenamento: o app continua funcionando nesta sessão */
-  }
+  } catch {}
 }
 
-/** Zera o progresso ao criar uma conta nova. */
 export function startFreshProgress() {
   Object.assign(state, {
     avatar: { ...DEFAULT_AVATAR }, points: 0, savedGrams: 0, cookLog: [], favorites: [], reviews: {}, week: { key: "", points: 0 },

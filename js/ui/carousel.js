@@ -1,7 +1,3 @@
-/**
- * Carrossel de banners da home.
- * Troca por: setas, pontinhos, arrastar com o mouse, deslizar com o dedo e automaticamente.
- */
 import { BANNERS } from "../data/banners.js";
 import { BANNER_INTERVAL } from "../config.js";
 import { LEVELS, levelIndex, nextLevel } from "../data/levels.js";
@@ -73,7 +69,6 @@ export function goToBanner(index, manual = false) {
 
 export const stepBanner = delta => goToBanner(current + delta, true);
 
-/** Chamar uma vez na inicialização. */
 export function initCarousel() {
   document.addEventListener("mouseover", e => { hovering = !!e.target.closest("#carousel"); });
 
@@ -91,7 +86,7 @@ export function initCarousel() {
     setTimeout(() => { drag = null; }, 0);
   });
   document.addEventListener("pointercancel", () => { drag = null; });
-  // Um arraste não deve "clicar" no botão do banner.
+  // arrastar não pode disparar o clique do botão
   document.addEventListener("click", e => {
     if (drag?.moved && e.target.closest("#carousel")) { e.stopPropagation(); e.preventDefault(); }
   }, true);

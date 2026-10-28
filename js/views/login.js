@@ -1,4 +1,3 @@
-/** Tela de entrada: login, criação de conta com @usuário e acesso sem cadastro. */
 import { RESERVED_HANDLES } from "../data/community.js";
 import { state, ui, save, startFreshProgress } from "../core/store.js";
 import { $ } from "../core/utils.js";
@@ -10,7 +9,6 @@ const isEmail = v => /\S+@\S+\.\S+/.test(v);
 const handleTaken = handle =>
   RESERVED_HANDLES.includes(handle) || Object.values(state.accounts).some(acc => acc.handle === handle);
 
-/** Valida o @usuário. Retorna [estado, mensagem], estado = "" | "ok" | "error". */
 export function checkHandle(value) {
   if (!value) return ["", HANDLE_HINT];
   if (value.length < 3) return ["error", "Use pelo menos 3 caracteres."];
@@ -19,12 +17,7 @@ export function checkHandle(value) {
   return ["ok", `@${value} está livre. É seu!`];
 }
 
-/**
- * Composição Bauhaus da tela de entrada.
- * Hierarquia de cores (da maior para a menor área): Noite de Cozinha (fundo), Fogão Diário,
- * Folha Nova, laranja do logo e Molho Reduzido (só detalhes).
- * O prato do centro mostra assets/img/login/destaque.webp; sem a foto, aparece o símbolo do EcoChef.
- */
+// arte do login (bauhaus). o prato usa assets/img/login/destaque.webp
 function bauhausArt() {
   const star = (x, y, r, color) =>
     `<path d="M${x} ${y - r}Q${x + r * .18} ${y - r * .18} ${x + r} ${y}Q${x + r * .18} ${y + r * .18} ${x} ${y + r}Q${x - r * .18} ${y + r * .18} ${x - r} ${y}Q${x - r * .18} ${y - r * .18} ${x} ${y - r}Z" fill="${color}"/>`;
@@ -94,7 +87,6 @@ export function renderLogin() {
   </div>`;
 }
 
-/** Formata o @ enquanto a pessoa digita e mostra se está livre. */
 export function onHandleInput(input) {
   const value = input.value.toLowerCase().replace(/[^a-z0-9_]/g, "").slice(0, 15);
   if (input.value !== value) input.value = value;
@@ -104,7 +96,6 @@ export function onHandleInput(input) {
   hint.className = `field__hint ${status ? `field__hint--${status}` : ""}`;
 }
 
-/** Envio do formulário. Retorna true quando a pessoa entrou. */
 export function submitAuth(form) {
   const data = new FormData(form);
   const email = String(data.get("email") || "").trim().toLowerCase();

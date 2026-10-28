@@ -1,8 +1,3 @@
-/**
- * Ponto de entrada do EcoChef.
- * - render(): desenha a tela atual a partir de `state` e `ui`
- * - ACTIONS: o que cada botão faz (botões usam data-action="nome" e data-value="valor")
- */
 import { POINTS } from "./config.js";
 import { RECIPES } from "./data/recipes.js";
 import { WARDROBE, wardrobePart } from "./data/avatar.js";
@@ -15,6 +10,7 @@ import { initCarousel, goToBanner, stepBanner } from "./ui/carousel.js";
 import { showMessage, closeDialog } from "./ui/dialog.js";
 import { registerServiceWorker, showInstallHint, dismissInstallHint } from "./ui/install.js";
 import { renderHeader } from "./views/header.js";
+import { renderFooter } from "./views/footer.js";
 import { renderLogin, onHandleInput, submitAuth } from "./views/login.js";
 import { renderHome, renderGrid } from "./views/home.js";
 import { renderRecipe, findRecipe, resetVideo, stopVideo, toggleVideo, updateVideo } from "./views/recipe.js";
@@ -38,14 +34,13 @@ export function render() {
     return;
   }
   const keepScroll = $("#collections-track")?.scrollLeft || 0;
-  app.innerHTML = `${renderHeader()}<main class="page" id="main">${VIEWS[ui.view]()}</main>`;
+  app.innerHTML = `${renderHeader()}<main class="page" id="main">${VIEWS[ui.view]()}</main>${renderFooter()}`;
   renderGrid();
   if (ui.view === "recipe") updateVideo();
   const track = $("#collections-track");
   if (track) track.scrollLeft = keepScroll;
 }
 
-/* ---------- Navegação ---------- */
 function go(view, { top = true } = {}) {
   stopVideo();
   closeDialog();
@@ -76,14 +71,12 @@ function openRecipe(id) {
   go("recipe");
 }
 
-/* ---------- Ações dos botões ---------- */
+// cada botão chama uma ação pelo data-action
 const ACTIONS = {
-  // conta
   "auth-mode": v => { ui.authMode = v; render(); },
   guest: () => { state.user = { name: "Visitante" }; save(); render(); scrollTo(0, 0); showInstallHint(); },
   logout: () => { state.user = null; save(); ui.view = "home"; render(); scrollTo(0, 0); },
 
-  // navegação
   home: () => { ui.collection = "todas"; ui.query = ""; go("home"); },
   go: v => go(v),
   "open-recipe": v => openRecipe(v),
@@ -94,7 +87,6 @@ const ACTIONS = {
   },
   "profile-section": v => { go("profile", { top: false }); scrollToElement($(`#${v}`)); },
 
-  // home
   "toggle-collection": v => { ui.collection = ui.collection === v ? "todas" : v; render(); },
   "clear-filters": () => { ui.collection = "todas"; ui.query = ""; render(); },
   "collections-scroll": v => {
@@ -104,7 +96,6 @@ const ACTIONS = {
   "banner-step": v => stepBanner(Number(v)),
   "banner-go": v => goToBanner(Number(v), true),
 
-  // receita
   "toggle-favorite": v => {
     const id = Number(v);
     const i = state.favorites.indexOf(id);
@@ -139,7 +130,6 @@ const ACTIONS = {
     toast(first ? `Avaliação publicada. Obrigado por ajudar a comunidade! +${POINTS.review} pontos` : "Avaliação atualizada.");
   },
 
-  // perfil
   "wardrobe-tab": v => { ui.wardrobeTab = v; render(); },
   wear: (v, el) => {
     const part = el.dataset.part, index = Number(v);
@@ -158,19 +148,17 @@ const ACTIONS = {
     toast("Visual novo! Gostou? Sorteie de novo se quiser.");
   },
 
-  // planos e janelas
   "choose-plan": v => { state.plan = Number(v); save(); render(); toast(`Plano ${PLANS[state.plan].name} ativado. Bom proveito!`); },
   "dialog-plans": () => go("plans"),
   "dialog-close": () => closeDialog(),
   "install-dismiss": () => dismissInstallHint(),
 };
 
-/* ---------- Eventos ---------- */
 function bindEvents() {
   document.addEventListener("click", e => {
     const el = e.target.closest("[data-action]");
     if (!el) return;
-    // Depois de clicar num item do cabeçalho, os menus ficam fechados até o mouse sair dele.
+    // fecha os menus do header até o mouse sair dele
     if (el.closest(".site-header")) {
       ui.suppressMenus = true;
       document.activeElement?.blur();
@@ -196,7 +184,7 @@ function bindEvents() {
     if (e.target.id === "auth-form" && submitAuth(e.target)) { ui.view = "home"; render(); scrollTo(0, 0); showInstallHint(); }
   });
 
-  // Foto enviada pelo usuário: reduzida para no máximo 900 px e guardada no navegador.
+  // foto do usuário: reduz pra 900px antes de salvar
   document.addEventListener("change", e => {
     const file = e.target.id === "photo-input" && e.target.files[0];
     if (!file) return;
@@ -223,7 +211,6 @@ function bindEvents() {
   dialog.addEventListener("click", e => { if (e.target === dialog) dialog.close(); });
 }
 
-/* ---------- Início ---------- */
 watchMissingImages();
 initCarousel();
 bindEvents();
@@ -231,5 +218,4 @@ render();
 registerServiceWorker();
 if (state.user) showInstallHint();
 
-// Disponível no console para depuração.
 window.EcoChef = { state, ui, RECIPES, render };

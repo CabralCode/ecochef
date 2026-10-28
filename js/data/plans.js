@@ -1,4 +1,3 @@
-/** Planos de assinatura. `daily` = quantas receitas diferentes podem ser abertas por dia. */
 export const PLANS = [
   {
     name: "Silver",

@@ -1,10 +1,6 @@
-/**
- * Peças do personagem (avatar). Cada peça é um desenho SVG em uma grade de 100 × 100.
- * `lock` é o índice do nível necessário para desbloquear (veja js/data/levels.js):
- * 0 = Semente (livre), 1 = Broto, 2 = Horta, 3 = Pomar.
- */
 export const DEFAULT_AVATAR = { base: 1, face: 0, accessory: 1, mustache: 0, makeup: 0, background: 0 };
 
+// lock = nível pra desbloquear (0 semente, 1 broto, 2 horta, 3 pomar)
 export const WARDROBE = [
   { key: "base", label: "Personagem", items: [
     { name: "Tomate", lock: 0, svg: '<circle cx="50" cy="56" r="34" fill="#C8372D"/><path d="M38 24q12 6 24 0-6-8-12-6-6-2-12 6z" fill="#3C8A3E"/>' },

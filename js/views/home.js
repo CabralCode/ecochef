@@ -1,4 +1,3 @@
-/** Home (banners, busca, categorias e receitas) e página de favoritas. */
 import { RECIPES } from "../data/recipes.js";
 import { COLLECTIONS, findCollection } from "../data/categories.js";
 import { state, ui, recipesOpenedToday, dailyLimit } from "../core/store.js";
@@ -69,7 +68,6 @@ export function renderHome(favorites = false) {
 
 const matchesQuery = (recipe, q) => !q || `${recipe.name} ${recipe.ingredients.map(i => i[2]).join(" ")}`.toLowerCase().includes(q);
 
-/** Atualiza só a grade e o título dos resultados (usado também enquanto a pessoa digita). */
 export function renderGrid() {
   const grid = $("#recipe-grid");
   if (!grid) return;

@@ -1,4 +1,3 @@
-/** Ranking semanal. As outras pessoas são exemplos até existir banco de dados. */
 import { SAMPLE_PEOPLE } from "../data/community.js";
 import { planName } from "../data/plans.js";
 import { state, weekPoints } from "../core/store.js";

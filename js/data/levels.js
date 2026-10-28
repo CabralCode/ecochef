@@ -1,4 +1,3 @@
-/** Níveis de jogador. `min` = pontos mínimos. `icon` = SVG em grade 24 × 24. */
 export const LEVELS = [
   { name: "Semente", min: 0, icon: '<ellipse cx="12" cy="14" rx="5" ry="6.5" fill="#B07A45"/><path d="M12 8q1-3 3-4" stroke="#3C8A3E" stroke-width="2" fill="none" stroke-linecap="round"/>' },
   { name: "Broto", min: 30, icon: '<path d="M12 21v-9" stroke="#3C8A3E" stroke-width="2.4" stroke-linecap="round"/><path d="M12 13q-7 0-7-7 7 0 7 7zM12 11q6 0 7-6-7 0-7 6z" fill="#5BAE4F"/>' },
@@ -12,7 +11,6 @@ export function levelIndex(points) {
   return index;
 }
 
-/** Progresso (0 a 100) dentro do nível atual. */
 export function levelProgress(points) {
   const i = levelIndex(points);
   if (i === LEVELS.length - 1) return 100;

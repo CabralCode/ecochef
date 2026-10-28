@@ -1,13 +1,4 @@
-/**
- * Base de receitas do EcoChef.
- *
- * - `slug` define o nome do arquivo de imagem: assets/img/receitas/<slug>.webp
- * - `plan`: 0 = Silver, 1 = Gold, 2 = Diamond
- * - `nutrition`: valores POR PORÇÃO, estimados com as tabelas TACO (Unicamp) e USDA
- * - `wasteGrams`: gramas de alimento que iriam para o lixo, na receita inteira
- * - `ingredients`: [quantidade, unidade, descrição]. A quantidade escala com as porções.
- * - Para usar outro formato ou nome de imagem numa receita, adicione `image: "caminho/arquivo.jpg"`.
- */
+// nutrição por porção (TACO/USDA), wasteGrams = receita inteira
 export const RECIPES = [
   {
     "id": 1,

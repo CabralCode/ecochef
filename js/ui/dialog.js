@@ -1,6 +1,5 @@
 import { $ } from "../core/utils.js";
 
-/** Janela de aviso. Com `upgrade`, mostra o botão "Ver planos". */
 export function showMessage(title, body, { upgrade = false } = {}) {
   const dialog = $("#dialog");
   dialog.innerHTML = `<div class="dialog__body">

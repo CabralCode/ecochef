@@ -1,4 +1,3 @@
-/** Cabeçalho: logo, navegação com menus suspensos, nível/pontos e avatar. */
 import { collectionsByGroup } from "../data/categories.js";
 import { LEVELS, levelIndex, levelProgress } from "../data/levels.js";
 import { planName } from "../data/plans.js";
