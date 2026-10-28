@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>EcoChef</title>
+  <meta name="claude:viewport-fit-sides" content="cover">
+  <meta name="description" content="Receitas de aproveitamento integral: cascas, talos, sementes e a comida de ontem viram pratos que dão gosto de servir.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&display=swap">
+
+  <!-- Ordem importa: tokens → base → layout → componentes → páginas -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <!-- Definições SVG compartilhadas: cores dos planos (aro do avatar) e recorte do fundo do avatar -->
+  <svg width="0" height="0" class="svg-defs" aria-hidden="true">
+    <defs>
+      <linearGradient id="plan-0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2F4F7"/><stop offset=".5" stop-color="#9AA3AD"/><stop offset="1" stop-color="#E3E6EA"/></linearGradient>
+      <linearGradient id="plan-1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE08A"/><stop offset=".5" stop-color="#D4A017"/><stop offset="1" stop-color="#F6C945"/></linearGradient>
+      <linearGradient id="plan-2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E0F7FF"/><stop offset=".5" stop-color="#29B6F6"/><stop offset="1" stop-color="#B3E5FC"/></linearGradient>
+      <clipPath id="avatar-clip"><circle cx="50" cy="50" r="44"/></clipPath>
+    </defs>
+  </svg>
+
+  <div id="app"></div>
+  <dialog id="dialog" class="dialog"></dialog>
+  <div id="toast" class="toast" role="status"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

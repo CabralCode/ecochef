@@ -1,0 +1,67 @@
+/* ==========================================================================
+   Base: reset leve, tipografia e elementos de formulário
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html { background: var(--bg); scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--text-md);
+  line-height: 1.45;
+}
+
+/* Faixa da área segura do celular, na cor do cabeçalho */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--header);
+  z-index: 20;
+}
+
+h1, h2, h3, h4 { margin: 0; line-height: 1.1; text-wrap: balance; }
+p { margin: 0; }
+img { max-width: 100%; display: block; }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+[hidden] { display: none !important; }
+
+.svg-defs { position: absolute; }
+
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+/* Campos */
+input[type="text"], input[type="email"], input[type="password"], input[type="search"], textarea {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 12px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--ink);
+}
+textarea { min-height: 80px; }
+
+/* Texto auxiliar */
+.meta { color: var(--muted); font-size: var(--text-sm); }
+.note { color: var(--muted); font-size: 13px; }
+.label { font-size: var(--text-sm); letter-spacing: .08em; text-transform: uppercase; color: var(--brand-text); }
+.handle { color: var(--muted); font-weight: 400; font-size: .9em; }
+.kcal { color: var(--accent-text); }
+.stars { color: var(--accent-text); letter-spacing: 2px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
