@@ -4,7 +4,7 @@
  * IMPORTANTE: ao publicar uma versão nova, aumente o número em VERSION.
  * Assim os celulares baixam os arquivos novos em vez de usar os guardados.
  */
-const VERSION = "ecochef-v2";
+const VERSION = "ecochef-v5";
 const APP_CACHE = `${VERSION}-app`;
 const RUNTIME_CACHE = `${VERSION}-runtime`;
 
@@ -12,15 +12,8 @@ const RUNTIME_CACHE = `${VERSION}-runtime`;
 const APP_FILES = [
   "./",
   "./index.html",
-  "./assets/brand/logo-horizontal-branco.png",
   "./assets/brand/logo-horizontal-cor.png",
-  "./assets/brand/logo-horizontal-preto.png",
-  "./assets/brand/logo-vertical-branco.png",
-  "./assets/brand/logo-vertical-cor.png",
-  "./assets/brand/logo-vertical-preto.png",
-  "./assets/brand/marca-branco.png",
   "./assets/brand/marca-cor.png",
-  "./assets/brand/marca-preto.png",
   "./assets/icons/apple-touch-icon.png",
   "./assets/icons/favicon-32.png",
   "./assets/icons/icon-192.png",

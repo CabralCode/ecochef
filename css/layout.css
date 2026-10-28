@@ -33,7 +33,10 @@
 .logo img { height: 44px; width: auto; }
 
 .nav { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
-.nav__link { background: transparent; border: 0; color: var(--ink); font-weight: 600; padding: 10px 14px; border-radius: var(--radius-pill); min-height: var(--tap); }
+.nav__link { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 0; color: var(--ink); font-weight: 600; padding: 10px 14px; border-radius: var(--radius-pill); min-height: var(--tap); }
+.nav__icon { display: none; flex: none; }
+/* No computador, só Favoritas mostra o ícone (estrela) ao lado do texto */
+.nav__link[data-value="favorites"] .nav__icon { display: block; width: 17px; height: 17px; }
 .nav__link:hover { background: var(--surface-soft); }
 .nav__link.is-active, .nav__link.is-active:hover { background: var(--navy); color: #fff; }
 .nav__chevron { margin-left: 6px; vertical-align: -1px; transition: transform .15s; }
@@ -95,8 +98,18 @@
     border-top: 1px solid var(--line);
     box-shadow: 0 -4px 16px rgba(30, 29, 86, .08);
   }
-  .nav__link { padding: 10px 2px; font-size: 13px; }
-  .has-menu > .nav__link { flex: 1; }
+  /* Barra inferior: ícone em cima, nome embaixo, todos na mesma altura */
+  .nav { align-items: stretch; }
+  .nav > .nav__link, .has-menu > .nav__link {
+    flex: 1; width: 100%; height: 56px; min-height: 0;
+    flex-direction: column; justify-content: center; gap: 4px;
+    padding: 6px 2px; border-radius: 14px; color: var(--muted); font-size: 11px; font-weight: 600; line-height: 1;
+  }
+  .nav__icon, .nav__link[data-value="favorites"] .nav__icon { display: block; width: 24px; height: 24px; }
+  .nav__label { white-space: nowrap; }
+  .nav__link:hover { background: transparent; }
+  .nav__link.is-active, .nav__link.is-active:hover { background: var(--surface-soft); color: var(--navy); font-weight: 700; }
+  .nav__link.is-active .nav__icon { color: var(--coral); }
   .nav__chevron, .menu { display: none !important; }
 
   .user-status { flex: 1; justify-content: flex-end; gap: 8px; }

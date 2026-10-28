@@ -1,5 +1,4 @@
 /** Cabeçalho: logo, navegação com menus suspensos, nível/pontos e avatar. */
-import { RECIPES } from "../data/recipes.js";
 import { collectionsByGroup } from "../data/categories.js";
 import { LEVELS, levelIndex, levelProgress } from "../data/levels.js";
 import { planName } from "../data/plans.js";
@@ -10,11 +9,11 @@ import { renderAvatar } from "../ui/avatar.js";
 import { icon } from "../ui/icons.js";
 
 const NAV = [
-  { view: "home", label: "Receitas", menu: recipesMenu },
-  { view: "favorites", label: "★ Favoritas" },
-  { view: "ranking", label: "Ranking" },
-  { view: "plans", label: "Planos" },
-  { view: "profile", label: "Perfil", menu: profileMenu, alignRight: true },
+  { view: "home", label: "Receitas", icon: "bowl", menu: recipesMenu },
+  { view: "favorites", label: "Favoritas", icon: "star" },
+  { view: "ranking", label: "Ranking", icon: "trophy" },
+  { view: "plans", label: "Planos", icon: "diamond" },
+  { view: "profile", label: "Perfil", icon: "user", menu: profileMenu, alignRight: true },
 ];
 
 function recipesMenu() {
@@ -59,7 +58,7 @@ export function profileMenu() {
 export function renderHeader() {
   const active = ui.view === "recipe" ? "home" : ui.view;
   const nav = NAV.map(n => {
-    const button = `<button class="nav__link ${active === n.view ? "is-active" : ""}" data-action="go" data-value="${n.view}">${n.label}${n.menu ? icon("chevronDown", 12, "nav__chevron") : ""}</button>`;
+    const button = `<button class="nav__link ${active === n.view ? "is-active" : ""}" data-action="go" data-value="${n.view}" aria-label="${n.label}">${icon(n.icon, 22, "nav__icon")}<span class="nav__label">${n.label}</span>${n.menu ? icon("chevronDown", 12, "nav__chevron") : ""}</button>`;
     return n.menu ? `<div class="has-menu ${n.alignRight ? "has-menu--right" : ""}">${button}${n.menu()}</div>` : button;
   }).join("");
   const li = levelIndex(state.points);

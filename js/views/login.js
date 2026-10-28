@@ -19,19 +19,51 @@ export function checkHandle(value) {
   return ["ok", `@${value} está livre. É seu!`];
 }
 
+/**
+ * Composição Bauhaus da tela de entrada.
+ * Hierarquia de cores (da maior para a menor área): Noite de Cozinha (fundo), Fogão Diário,
+ * Folha Nova, laranja do logo e Molho Reduzido (só detalhes).
+ * O prato do centro mostra assets/img/login/destaque.webp; sem a foto, aparece o símbolo do EcoChef.
+ */
+function bauhausArt() {
+  const star = (x, y, r, color) =>
+    `<path d="M${x} ${y - r}Q${x + r * .18} ${y - r * .18} ${x + r} ${y}Q${x + r * .18} ${y + r * .18} ${x} ${y + r}Q${x - r * .18} ${y + r * .18} ${x - r} ${y}Q${x - r * .18} ${y - r * .18} ${x} ${y - r}Z" fill="${color}"/>`;
+  const dots = (x0, y0, cols, rows, gap, r) => {
+    let out = "";
+    for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) out += `<circle cx="${x0 + i * gap}" cy="${y0 + j * gap}" r="${r}" fill="#fff"/>`;
+    return out;
+  };
+  const leaf = (x, y, w, h, color) => `<path d="M${x} ${y}Q${x + w / 2} ${y - h} ${x + w} ${y}Q${x + w / 2} ${y + h} ${x} ${y}Z" fill="${color}"/>`;
+  return `<svg class="bauhaus" viewBox="0 0 540 900" preserveAspectRatio="xMidYMid slice">
+    <rect width="540" height="900" fill="var(--navy)"/>
+    <rect x="0" y="0" width="180" height="180" fill="var(--leaf)"/>${dots(42, 42, 1, 2, 48, 11)}
+    <path d="M180 300V100A90 90 0 0 1 360 100V300Z" fill="var(--coral)"/>
+    <path d="M540 0V200A200 200 0 0 1 340 0Z" fill="var(--orange)"/>
+    <circle cx="455" cy="262" r="26" fill="var(--coral)"/>
+    <path d="M0 210A140 140 0 0 1 0 490Z" fill="var(--coral)"/>
+    <path d="M540 300V620A320 320 0 0 1 220 300Z" fill="var(--leaf)"/>
+    <rect x="0" y="560" width="200" height="340" fill="var(--coral)"/>
+    <path d="M0 560A100 100 0 0 0 200 560Z" fill="var(--wine)"/>
+    ${leaf(222, 830, 96, 52, "var(--orange)")}${leaf(334, 830, 96, 52, "var(--orange)")}
+    <path d="M540 660V900H360V840A180 180 0 0 1 540 660Z" fill="var(--leaf)"/>${dots(410, 830, 3, 2, 40, 9)}
+    ${star(92, 520, 34, "var(--leaf)")}${star(478, 470, 40, "var(--wine)")}${star(300, 62, 22, "#fff")}
+  </svg>
+  <div class="bauhaus__plate">
+    <img class="bauhaus__fallback" src="assets/brand/marca-cor.png" alt="">
+    <img class="media__img" src="assets/img/login/destaque.webp" alt="">
+  </div>`;
+}
+
 export function renderLogin() {
   const signup = ui.authMode === "signup";
   return `<div class="auth">
-    <section class="auth__hero">
-      <div class="auth__pattern" aria-hidden="true"></div>
-      <div class="auth__copy">
-        <img class="auth__logo" src="assets/brand/logo-vertical-branco.png" alt="EcoChef" width="150" height="138">
+    <aside class="auth__art" aria-hidden="true">${bauhausArt()}</aside>
+    <section class="auth__main">
+      <div class="auth__intro">
+        <img class="auth__logo" src="assets/brand/logo-horizontal-cor.png" alt="EcoChef" width="200" height="59">
         <h1>Sabor que não vai pro lixo.</h1>
         <p>Receitas testadas que transformam cascas, talos, sementes e a comida de ontem em pratos que dão gosto de servir.</p>
-        <div class="auth__pills"><span>Cascas</span><span>Talos e folhas</span><span>Pão amanhecido</span><span>Comida de ontem</span></div>
       </div>
-    </section>
-    <section class="auth__form-area">
       <div class="auth__card">
         <div class="segmented" role="group" aria-label="Tipo de acesso">
           <button class="${signup ? "" : "is-active"}" data-action="auth-mode" data-value="login" aria-pressed="${!signup}">Entrar</button>

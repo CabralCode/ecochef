@@ -16,6 +16,8 @@ const PATHS = {
   list: stroke("M9 6h12M9 12h12M9 18h12M4 6h.5M4 12h.5M4 18h.5", 2.4),
   diamond: stroke("M6 4h12l4 5-10 11L2 9zM2 9h20"),
   logout: stroke("M10 4H5v16h5M14 8l4 4-4 4M18 12H9"),
+  bowl: stroke("M3 11h18a9 9 0 0 1-18 0zM9 7c0-1.5 1.5-1.5 1.5-3M14 7c0-1.5 1.5-1.5 1.5-3", 1.8),
+  user: `<circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>${stroke("M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6", 1.8)}`,
 };
 
 export const icon = (name, size = 20, className = "") =>
