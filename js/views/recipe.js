@@ -7,6 +7,7 @@ import { $, escapeHtml, formatNumber, plural, stars } from "../core/utils.js";
 import { renderAvatar } from "../ui/avatar.js";
 import { recipeMedia, media } from "../ui/media.js";
 import { planBadge } from "../ui/recipeCard.js";
+import { icon } from "../ui/icons.js";
 
 export const findRecipe = id => RECIPES.find(r => r.id === Number(id));
 
@@ -79,14 +80,23 @@ function reviewsBlock(recipe) {
   const avg = averageRating(recipe.id);
   return `<div class="row"><b class="rating-big">${formatNumber(avg)}</b><span class="stars">${stars(Math.round(avg))}</span>
       <span class="meta">${plural(list.length, "avaliação", "avaliações")} · as de outras pessoas são exemplos</span></div>
-    <div class="reviews">${list.map(r => `<div class="review">${renderAvatar(r.avatar, r.plan, 40)}<div>
+    <div class="reviews">${list.map(r => `<div class="review ${r.photo ? "review--photo" : ""}">${renderAvatar(r.avatar, r.plan, 40)}<div>
       <b>${escapeHtml(r.name)}</b>${r.handle ? ` <span class="handle">@${escapeHtml(r.handle)}</span>` : ""} <span class="plan-tag plan-tag--${r.plan}">${planName(r.plan)}</span>
-      <div class="stars">${stars(r.stars)}</div><div>${escapeHtml(r.text)}</div></div></div>`).join("")}</div>
+      ${r.photo ? `<span class="proof-tag">${icon("camera", 14)}Preparo comprovado</span>` : ""}
+      <div class="stars">${stars(r.stars)}</div><div>${escapeHtml(r.text)}</div>
+      ${r.photo ? `<button class="review__photo" data-action="review-photo-view" data-value="${r.mine ? "mine" : ""}" aria-label="Ver foto do preparo"><img src="${r.photo}" alt="Foto do preparo de ${escapeHtml(r.name)}"></button>` : ""}
+    </div></div>`).join("")}</div>
     <h4 class="label">Já preparou? Conte como ficou</h4>
     <div class="star-picker" role="group" aria-label="Sua nota">${[1, 2, 3, 4, 5].map(i =>
       `<button data-action="review-stars" data-value="${i}" aria-label="${plural(i, "estrela", "estrelas")}">${i <= ui.review.stars ? "★" : "☆"}</button>`).join("")}</div>
     <textarea id="review-text" placeholder="Como ficou? Mudou algum ingrediente? Sua dica ajuda quem vai fazer depois." aria-label="Comentário">${escapeHtml(ui.review.text)}</textarea>
-    <button class="btn" data-action="review-send">Publicar avaliação · +${POINTS.review} pts</button>`;
+    <div class="photo-proof">
+      ${ui.review.photo
+        ? `<div class="photo-proof__preview"><img src="${ui.review.photo}" alt="Foto do seu preparo"><button class="btn btn--ghost" data-action="review-photo-remove">Remover foto</button></div>`
+        : `<button class="photo-proof__add" data-action="review-photo-pick">${icon("camera", 22)}<span><b>Adicionar foto do preparo</b><small>Avaliações com foto ganham +${POINTS.photoReview - POINTS.review} pts e aparecem primeiro</small></span></button>`}
+      <input type="file" accept="image/*" id="review-photo-input" hidden>
+    </div>
+    <button class="btn" data-action="review-send">Publicar avaliação · +${ui.review.photo ? POINTS.photoReview : POINTS.review} pts</button>`;
 }
 
 export function renderRecipe() {

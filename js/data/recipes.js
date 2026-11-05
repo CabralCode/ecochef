@@ -432,64 +432,6 @@ export const RECIPES = [
     "tip": "Receita exclusiva Diamond. O cálculo considera só o açúcar que fica nas cascas, não a calda que sobra."
   },
   {
-    "id": 9,
-    "slug": "fantasminhas-de-arroz-amanhecido",
-    "name": "Fantasminhas de arroz amanhecido",
-    "category": "Arroz amanhecido",
-    "minutes": 30,
-    "difficulty": "Fácil",
-    "fit": false,
-    "plan": 0,
-    "servings": 6,
-    "wasteGrams": 480,
-    "nutrition": {
-      "kcal": 168,
-      "protein": 5.9,
-      "carbs": 26.0,
-      "fat": 4.1,
-      "fiber": 1.6
-    },
-    "ingredients": [
-      [
-        3,
-        "xícaras",
-        "de arroz amanhecido"
-      ],
-      [
-        2,
-        "",
-        "ovos"
-      ],
-      [
-        4,
-        "colheres (sopa)",
-        "de queijo ralado"
-      ],
-      [
-        3,
-        "colheres (sopa)",
-        "de farinha de trigo"
-      ],
-      [
-        1,
-        "pitada",
-        "de sal"
-      ],
-      [
-        12,
-        "",
-        "azeitonas pretas para os olhos"
-      ]
-    ],
-    "steps": [
-      "Misture o arroz, os ovos, o queijo, a farinha e o sal até virar uma massa firme.",
-      "Modele fantasminhas em formato de gota, com a pontinha para cima, e coloque numa assadeira untada. Faça a barra ondulada com a ponta de uma colher.",
-      "Asse a 200 °C por 20 minutos, até dourar de leve.",
-      "Faça os olhos e a boca com pedacinhos de azeitona preta e sirva com molho de tomate caseiro."
-    ],
-    "tip": "O molho de tomate maduro do EcoChef vira o sangue de mentirinha da festa."
-  },
-  {
     "id": 10,
     "slug": "doce-de-casca-de-melancia",
     "name": "Doce de casca de melancia",
@@ -3096,5 +3038,63 @@ export const RECIPES = [
       "Frite em óleo quente ou asse a 200 °C por 25 minutos."
     ],
     "tip": "Receita exclusiva Diamond. Assados, cada porção fica com cerca de 55 kcal a menos."
+  },
+  {
+    "id": 58,
+    "slug": "pudim-de-panetone-amanhecido",
+    "name": "Pudim de panetone amanhecido",
+    "category": "Pão amanhecido",
+    "minutes": 70,
+    "difficulty": "Médio",
+    "fit": false,
+    "plan": 0,
+    "servings": 10,
+    "wasteGrams": 304,
+    "nutrition": {
+      "kcal": 264,
+      "protein": 6.5,
+      "carbs": 44.8,
+      "fat": 7.0,
+      "fiber": 0.7
+    },
+    "ingredients": [
+      [
+        300,
+        "g",
+        "de panetone ou chocotone amanhecido"
+      ],
+      [
+        3,
+        "xícaras",
+        "de leite"
+      ],
+      [
+        3,
+        "",
+        "ovos"
+      ],
+      [
+        0.5,
+        "xícara",
+        "de açúcar para a massa"
+      ],
+      [
+        1,
+        "xícara",
+        "de açúcar para a calda"
+      ],
+      [
+        1,
+        "colher (chá)",
+        "de raspas de casca de laranja"
+      ]
+    ],
+    "steps": [
+      "Derreta o açúcar da calda numa forma de pudim até dourar e espalhe pelas laterais.",
+      "Pique o panetone e deixe de molho no leite por 10 minutos.",
+      "Bata no liquidificador com os ovos, o açúcar e as raspas de laranja.",
+      "Despeje na forma, cubra com papel-alumínio e asse em banho-maria a 180 °C por cerca de 50 minutos. Espere esfriar e leve à geladeira por 4 horas antes de desenformar."
+    ],
+    "tip": "Depois do Natal quase sempre sobra panetone ressecado. Com chocotone também fica ótimo: nesse caso, use metade do açúcar da massa."
   }
 ];

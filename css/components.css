@@ -139,13 +139,11 @@
 .carousel__dot.is-active i { width: 26px; opacity: 1; }
 
 .anim-float { animation: float 2.2s ease-in-out infinite alternate; }
-.anim-bat { animation: bat 5s ease-in-out infinite alternate; }
 .anim-rise { animation: rise 3.2s ease-in infinite; }
 .anim-twinkle { animation: twinkle 1.6s ease-in-out infinite alternate; }
 .anim-delay { animation-delay: .8s; }
 .anim-delay-2 { animation-delay: 1.6s; }
 @keyframes float { to { transform: translateY(-14px); } }
-@keyframes bat { to { transform: translate(40px, -14px); } }
 @keyframes rise { 0% { transform: translateY(22px); opacity: 0; } 30%, 70% { opacity: 1; } 100% { transform: translateY(-26px); opacity: 0; } }
 @keyframes twinkle { from { opacity: .25; } to { opacity: 1; } }
 

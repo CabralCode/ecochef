@@ -5,7 +5,8 @@ export function reviewsFor(recipeId) {
   const list = sampleReviewsFor(recipeId);
   const mine = state.reviews[recipeId];
   if (mine) list.unshift({ ...mine, name: `${state.user.name} (você)`, handle: state.user.handle, plan: state.plan, avatar: state.avatar, mine: true });
-  return list;
+  // avaliação com foto do preparo aparece primeiro
+  return list.sort((a, b) => Boolean(b.photo) - Boolean(a.photo));
 }
 
 export function averageRating(recipeId) {

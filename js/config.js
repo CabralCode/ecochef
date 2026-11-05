@@ -8,6 +8,6 @@ export const IMAGES = {
 export const STORAGE_KEY = "ecochef.v2";
 export const LEGACY_STORAGE_KEY = "ecochef.v1";
 
-export const POINTS = { cook: 10, review: 5 };
+export const POINTS = { cook: 10, review: 5, photoReview: 7 };
 
 export const BANNER_INTERVAL = 6000;

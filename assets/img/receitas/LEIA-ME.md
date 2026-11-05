@@ -13,7 +13,6 @@ O nome do arquivo é o slug da receita:
 | 6 | Bolo de casca de banana | `bolo-de-casca-de-banana.webp` |
 | 7 | Creme de cascas de abóbora cabotiá | `creme-de-cascas-de-abobora-cabotia.webp` |
 | 8 | Casca de laranja cristalizada | `casca-de-laranja-cristalizada.webp` |
-| 9 | Fantasminhas de arroz amanhecido | `fantasminhas-de-arroz-amanhecido.webp` |
 | 10 | Doce de casca de melancia | `doce-de-casca-de-melancia.webp` |
 | 11 | Doce de casca de maracujá | `doce-de-casca-de-maracuja.webp` |
 | 12 | Carne louca de casca de banana | `carne-louca-de-casca-de-banana.webp` |
@@ -62,3 +61,4 @@ O nome do arquivo é o slug da receita:
 | 55 | Bolinho de purê de batata | `bolinho-de-pure-de-batata.webp` |
 | 56 | Caldo de frango com carcaça | `caldo-de-frango-com-carcaca.webp` |
 | 57 | Croquete de carne de panela | `croquete-de-carne-de-panela.webp` |
+| 58 | Pudim de panetone amanhecido | `pudim-de-panetone-amanhecido.webp` |

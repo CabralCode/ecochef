@@ -67,7 +67,7 @@ function openRecipe(id) {
   ui.recipeId = recipe.id;
   ui.servings = recipe.servings;
   const mine = state.reviews[recipe.id];
-  ui.review = { stars: mine?.stars || 0, text: mine?.text || "" };
+  ui.review = { stars: mine?.stars || 0, text: mine?.text || "", photo: mine?.photo || "" };
   go("recipe");
 }
 
@@ -117,17 +117,25 @@ const ACTIONS = {
   "photo-remove": () => { delete state.photos[ui.recipeId]; save(); render(); },
   "video-toggle": () => toggleVideo(),
   "video-restart": () => { resetVideo(); toggleVideo(); },
-  "review-stars": v => { ui.review.text = $("#review-text")?.value ?? ui.review.text; ui.review.stars = Number(v); render(); },
+  "review-stars": v => { keepReviewText(); ui.review.stars = Number(v); render(); },
+  "review-photo-pick": () => { keepReviewText(); $("#review-photo-input").click(); },
+  "review-photo-remove": () => { keepReviewText(); ui.review.photo = ""; render(); },
+  "review-photo-view": (v, el) => showPhoto(el.querySelector("img").src),
   "review-send": () => {
     const text = $("#review-text").value.trim();
     if (!ui.review.stars) return toast("Escolha de 1 a 5 estrelas.");
     if (!text) return toast("Escreva um comentário curto antes de publicar.");
-    const first = !state.reviews[ui.recipeId];
-    state.reviews[ui.recipeId] = { stars: ui.review.stars, text };
+    const before = state.reviews[ui.recipeId];
+    const earned = ui.review.photo ? POINTS.photoReview : POINTS.review;
+    // quem adiciona a foto depois ganha só a diferença
+    const already = before ? (before.earned ?? POINTS.review) : 0;
+    const gain = Math.max(0, earned - already);
+    state.reviews[ui.recipeId] = { stars: ui.review.stars, text, photo: ui.review.photo, earned: Math.max(earned, already) };
     ui.review.text = text;
-    if (first) addPoints(POINTS.review);
+    if (gain) addPoints(gain);
     save(); render();
-    toast(first ? `Avaliação publicada. Obrigado por ajudar a comunidade! +${POINTS.review} pontos` : "Avaliação atualizada.");
+    if (!before) toast(ui.review.photo ? `Avaliação com foto publicada! +${gain} pontos` : `Avaliação publicada. Obrigado por ajudar a comunidade! +${gain} pontos`);
+    else toast(gain ? `Foto adicionada à avaliação! +${gain} pontos` : "Avaliação atualizada.");
   },
 
   "wardrobe-tab": v => { ui.wardrobeTab = v; render(); },
@@ -153,6 +161,33 @@ const ACTIONS = {
   "dialog-close": () => closeDialog(),
   "install-dismiss": () => dismissInstallHint(),
 };
+
+const keepReviewText = () => { ui.review.text = $("#review-text")?.value ?? ui.review.text; };
+
+// reduz a foto antes de salvar pra não estourar o localStorage
+function resizeImage(file, max, done) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const k = Math.min(1, max / Math.max(img.width, img.height));
+      canvas.width = img.width * k;
+      canvas.height = img.height * k;
+      canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+      done(canvas.toDataURL("image/jpeg", 0.78));
+    };
+    img.onerror = () => toast("Não conseguimos abrir essa imagem. Tente uma foto em JPG ou PNG.");
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function showPhoto(src) {
+  const dialog = $("#dialog");
+  dialog.innerHTML = `<div class="dialog__body"><img class="dialog__photo" src="${src}" alt="Foto do preparo"><div class="row"><button class="btn btn--ghost" data-action="dialog-close">Fechar</button></div></div>`;
+  if (!dialog.open) dialog.showModal();
+}
 
 function bindEvents() {
   document.addEventListener("click", e => {
@@ -184,27 +219,24 @@ function bindEvents() {
     if (e.target.id === "auth-form" && submitAuth(e.target)) { ui.view = "home"; render(); scrollTo(0, 0); showInstallHint(); }
   });
 
-  // foto do usuário: reduz pra 900px antes de salvar
   document.addEventListener("change", e => {
-    const file = e.target.id === "photo-input" && e.target.files[0];
+    const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const k = Math.min(1, 900 / Math.max(img.width, img.height));
-        canvas.width = img.width * k;
-        canvas.height = img.height * k;
-        canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
-        state.photos[ui.recipeId] = canvas.toDataURL("image/jpeg", 0.8);
+    if (e.target.id === "photo-input") {
+      resizeImage(file, 900, data => {
+        state.photos[ui.recipeId] = data;
         save(); render();
         toast("Foto adicionada. Ela fica salva só neste navegador.");
-      };
-      img.onerror = () => toast("Não conseguimos abrir essa imagem. Tente uma foto em JPG ou PNG.");
-      img.src = reader.result;
-    };
-    reader.readAsDataURL(file);
+      });
+    }
+    if (e.target.id === "review-photo-input") {
+      keepReviewText();
+      resizeImage(file, 720, data => {
+        ui.review.photo = data;
+        render();
+        toast(`Foto pronta! Publique a avaliação para ganhar +${POINTS.photoReview} pontos.`);
+      });
+    }
   });
 
   const dialog = $("#dialog");
