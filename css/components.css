@@ -172,8 +172,7 @@
   .banner, .banner--art { grid-template-columns: minmax(0, 1fr); }
   .banner__text { padding: 24px 20px 56px; }
   .banner__title { font-size: 28px; }
-  .banner__art { width: 100%; opacity: .3; }
-  .banner__visual { position: absolute; inset: 0; margin: 0; border-radius: 0; opacity: .35; }
+  .banner__art, .banner__visual { display: none; }
 
   .toast { bottom: calc(90px + env(safe-area-inset-bottom, 0px)); }
 }

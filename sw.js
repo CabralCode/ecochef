@@ -1,5 +1,5 @@
 // subir a versão a cada deploy
-const VERSION = "ecochef-v12";
+const VERSION = "ecochef-v13";
 const APP_CACHE = `${VERSION}-app`;
 const RUNTIME_CACHE = `${VERSION}-runtime`;
 
