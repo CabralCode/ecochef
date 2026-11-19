@@ -243,6 +243,9 @@ function bindEvents() {
   dialog.addEventListener("click", e => { if (e.target === dialog) dialog.close(); });
 }
 
+// o safari do iphone ignora user-scalable=no, então bloqueia o gesto de pinça aqui
+["gesturestart", "gesturechange", "gestureend"].forEach(type => document.addEventListener(type, e => e.preventDefault(), { passive: false }));
+
 watchMissingImages();
 initCarousel();
 bindEvents();

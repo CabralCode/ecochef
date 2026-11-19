@@ -5,7 +5,10 @@
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-html { background: var(--bg); scroll-padding-top: env(safe-area-inset-top, 0px); }
+html { background: var(--bg); scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* sem zoom de toque duplo e sem destaque cinza ao tocar */
+body { touch-action: pan-x pan-y; -webkit-tap-highlight-color: transparent; }
 
 body {
   margin: 0;
@@ -38,6 +41,7 @@ button { cursor: pointer; }
 
 input[type="text"], input[type="email"], input[type="password"], input[type="search"], textarea {
   width: 100%;
+  font-size: 16px;
   min-height: var(--tap);
   padding: 12px 14px;
   border: 1.5px solid var(--line);
