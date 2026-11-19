@@ -4,18 +4,6 @@ Protótipo de negócio e aplicação desenvolvido por Vitor Cabral para a Etec.
 
 O EcoChef é um app de receitas de aproveitamento integral: cascas, talos, folhas, sementes, pão e arroz amanhecidos e a comida de ontem viram pratos completos. Tem gamificação (pontos, níveis, troféus, ranking semanal e personagem personalizável) e três planos (Silver, Gold e Diamond).
 
-## Rodando
-
-O JS usa módulos, então precisa de um servidor local:
-
-```bash
-python3 -m http.server 8000
-```
-
-Depois é só abrir http://localhost:8000. A Live Server do VS Code também funciona.
-
-O site está publicado no GitHub Pages e pode ser instalado no celular como app (PWA): no Safari, Compartilhar › Adicionar à Tela de Início.
-
 ## Estrutura
 
 ```
@@ -52,20 +40,12 @@ assets/
 Enquanto a foto não existe, aparece um placeholder. A lista de nomes está no LEIA-ME de cada pasta.
 
 ## Identidade visual
-
 Fonte Poppins, fundo branco e a paleta do projeto: Noite de Cozinha `#1E1D56`, Fogão Diário `#FA4846`, Folha Nova `#33A67B` e Molho Reduzido `#A32237`, além do laranja do logo `#EE7433`.
 
 ## Dados
 
 Os valores nutricionais são estimativas por porção calculadas com as tabelas TACO (Unicamp) e USDA.
 Por enquanto as contas, pontos e favoritas ficam salvos no navegador (localStorage).
-
-## Próximos passos
-
-- Banco de dados e login de verdade (@usuário único no servidor)
-- Editar nome e @ pelo perfil
-- Fotos das receitas
-- Mais receitas em Sementes e caroços e em Bebidas
 
 ## Atualizando o app publicado
 
